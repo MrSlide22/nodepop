@@ -14,13 +14,12 @@ const anuncioSchema = mongoose.Schema({
 // creamos metodo estatico en el modelo
 // para recuperar lista de agentes con filtros
 anuncioSchema.statics.list = function (
-    criterios, skip, limit, select, sort,
+    criterios, skip, limit, sort,
     callback) {
 
     const query = Anuncio.find(criterios);
     query.skip(skip);
     query.limit(limit);
-    query.select(select);
     query.sort(sort);
     query.exec(callback);
 }
