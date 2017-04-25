@@ -6,6 +6,9 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const Anuncio = mongoose.model('Anuncio');
 
+const jwtAuth = require('../../lib/jwtAuth');
+router.use(jwtAuth);
+
 /* GET /apiv1/anuncios */
 router.get('/', function (req, res, next) {
 
@@ -26,8 +29,7 @@ router.get('/', function (req, res, next) {
     criterios.tags = {};
     criterios.tags.$in = tags;
   }
-
-  //falta
+  
   if (nombre) {
     criterios.nombre = {};
     criterios.nombre.$regex = new RegExp('^' + nombre, 'i');

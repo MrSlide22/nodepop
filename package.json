@@ -12,8 +12,11 @@
     "debug": "~2.6.3",
     "ejs": "~2.5.6",
     "express": "~4.15.2",
+    "i18n": "^0.8.3",
+    "jsonwebtoken": "^7.4.0",
     "mongoose": "^4.9.6",
     "morgan": "~1.8.1",
-    "serve-favicon": "~2.4.2"
+    "serve-favicon": "~2.4.2",
+    "sha256": "^0.2.0"
   }
 }

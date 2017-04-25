@@ -4,7 +4,6 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-const customError = require('./lib/customError');
 
 var index = require('./routes/index');
 
@@ -13,6 +12,21 @@ require('./models/Usuario');
 require('./models/Anuncio');
 
 var app = express();
+
+const i18n = require("i18n");
+i18n.configure({
+  locales: ['es', 'en'],
+  register: global,
+  directory: __dirname + '/locales'
+});
+
+app.use(i18n.init);
+
+app.use('/apiv1/:lang/*', (req, res, next) => {
+  i18n.setLocale(req, req.params.lang);
+  console.log(req.getLocale(), req.params.lang);
+  next();
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -27,24 +41,25 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
-app.use('/apiv1/anuncios', require('./routes/apiv1/anuncios'));
+app.use('/apiv1/:lang(es|en)?/anuncios', require('./routes/apiv1/anuncios'));
+app.use('/apiv1/:lang(es|en)?/usuarios', require('./routes/apiv1/usuarios'));
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  var err = new Error(customError.notFound);
+app.use(function (req, res, next) {
+  var err = new Error(req.__("page.notFound"));
   err.status = 404;
   next(err);
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.json({ success: false, error: err.message });
 });
 
 module.exports = app;

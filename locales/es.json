@@ -1,0 +1,8 @@
+{
+    "server.internalError": "Error en el servidor. Intentelo más tarde",
+    "page.notFound": "Ruta no encontrada",
+    "user.saveSuccess": "Usuario añadido correctamente",
+    "user.badCredentials": "Credenciales incorrectas",
+    "token.notFound": "Token no encontrado",
+    "token.invalid": "Token no valido"
+}

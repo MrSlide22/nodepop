@@ -1,0 +1,8 @@
+{
+	"server.internalError": "server.internalError",
+	"page.notFound": "page.notFound",
+	"user.saveSuccess": "user.saveSuccess",
+	"user.badCredentials": "user.badCredentials",
+	"token.notFound": "token.notFound",
+	"token.invalid": "token.invalid"
+}
