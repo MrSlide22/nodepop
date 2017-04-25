@@ -33,6 +33,27 @@ Este API maneja dos colecciones: `Anuncios` y `Usuarios`. Sus esquemas son los s
   
 ## Uso
 
+### Registro usuario
+Añade un nuevo usuario en la API. Recibe el nombre, email y clave del usuario.
+```
+POST /apiv1/usuarios
+BODY{
+  nombre: String,
+  email: String,
+  clave: String
+}
+```
+
+### Login
+```
+POST /apiv1/usuarios/login
+BODY{
+  email: String,
+  clave: String
+}
+```
+Devuelve un token que se utilizará para autenticar al usuario en siguientes conexiones
+
 ### Obtener los anuncios
 ```
 GET /apiv1/anuncios
