@@ -29,7 +29,8 @@ router.get('/', function (req, res, next) {
 
   //falta
   if (nombre) {
-    criterios.nombre = nombre;
+    criterios.nombre = {};
+    criterios.nombre.$regex = new RegExp('^' + nombre, 'i');
   }
 
   if (venta) {
@@ -54,7 +55,10 @@ router.get('/', function (req, res, next) {
     }
   }
 
-  console.log(criterios);
+  if (sort) {
+
+    sort = sort.replace(',', ' ');
+  }
 
   Anuncio.list(criterios, skip, limit, sort, (err, anuncios) => {
     if (err) {
@@ -63,6 +67,27 @@ router.get('/', function (req, res, next) {
     }
 
     res.json({ success: true, result: anuncios });
+  });
+});
+
+router.get('/tags', (req, res, next) => {
+
+  Anuncio.find({}, 'tags', (err, tags) => {
+
+    if (err) {
+      next(err);
+      result;
+    }
+
+    const reduceTags = tags.reduce((acum, elem) => {
+      return acum.tags.concat(elem.tags);
+    });
+
+    const uniqueTags = reduceTags.filter((item, pos, self) => {
+      return self.indexOf(item) == pos;
+    })
+
+    res.json({ success: true, result: uniqueTags });
   });
 });
 
