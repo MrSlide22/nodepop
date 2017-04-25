@@ -40,6 +40,7 @@ GET /apiv1/anuncios
 Se pueden aplicar los siguientes filtros a través de la `query string`:
 - `tag`: String,[String]. Cada tag va separado por comas. Ejemplo: `GET /apiv1/anuncios?tag=mobile,lifestyle`.
 - `venta`: Boolean. True: anuncios en venta. False: anuncios en compra. Ejemplo: `GET /apiv1/anuncios?venta=true`.
+- `nombre`: String. Obtiene los anuncios que empiecen por esta variable sin tener en cuenta las mayúsculas. Ejemplo: `GET /apiv1/anuncios?nombre=iphone`.
 - `precio`:
   - [Number]-[Number]: Rango de precios a mostrar. Se puede omitir alguno de los dos manteniendo el guión para obtener los productos "a partir de un precio" o "hasta un precio". Ejemplo: `GET /apiv1/anuncios?precio=49-100` `GET /apiv1/anuncios?precio=-100` `GET /apiv1/anuncios?precio=49-`.
   - Number: Precio exacto del anuncio. Ejemplo: `GET /apiv1/anuncios?precio=49`.
