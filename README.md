@@ -49,3 +49,8 @@ Se pueden aplicar los siguientes filtros a través de la `query string`:
 - `sort`: String [[-]String]. Ordena según los criterios ordenados. Ejemplo `GET /apiv1/anuncios?sort=precio,-nombre`.
   - Para ordenar por varios criterios, separar estos por comas.
   - Para realizar una ordenación inversa, añadir un guión delante del criterio.
+
+### Obtener todos los tags existentes
+```
+GET /apiv1/anuncios/tags
+```
