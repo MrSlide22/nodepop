@@ -75,3 +75,10 @@ Se pueden aplicar los siguientes filtros a través de la `query string`:
 ```
 GET /apiv1/anuncios/tags
 ```
+
+## Idiomas
+Esta API permite obtener las respuestas es dos idiomas posibles, español e ingles. Para ello es necesario indicarlo en los parámetros de la url. Por ejemplo:
+```
+GET /apiv1/es/anuncios
+GET /apiv1/en/anuncios?tags=mobile
+```
