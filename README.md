@@ -19,7 +19,7 @@ npm start
 
 ## Uso
 
-Obtener los anuncios
+### Obtener los anuncios
 ```GET /apiv1/anuncios```
 Se pueden aplicar los siguientes filtros a través de la `query string`:
 - `tag`: String,[String]. Cada tag va separado por comas. Ejemplo: `GET /apiv1/anuncios?tag=mobile,lifestyle`
