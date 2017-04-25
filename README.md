@@ -27,8 +27,8 @@ Este API maneja dos colecciones: `Anuncios` y `Usuarios`. Sus esquemas son los s
   - tags: `[String]`. Array de etiquetas.
 
 - `Usuarios`:
-  - nombre: `String`. Nombre del usuario. El usuario se autenticará con este nombre.
-  - email: `String`. Email del usuario.
+  - nombre: `String`. Nombre del usuario.
+  - email: `String`. Email del usuario. El usuario se autenticará con este email.
   - clave: `String`. Contraseña con la que el usuario se autenticará.
   
 ## Uso
