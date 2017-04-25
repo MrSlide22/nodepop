@@ -32,5 +32,5 @@ Se pueden aplicar los siguientes filtros a través de la `query string`:
 - `start`: Number. Saltar los n primeros anuncios. Ejemplo: `GET /apiv1/anuncios?start=2`
 - `limit`: Number. Limitar el número de anuncios mostrados. Ejemplo: `GET /apiv1/anuncios?limit=2`
 - `sort`: String [[-]String]. Ordena según los criterios ordenados. Ejemplo `GET /apiv1/anuncios?sort=precio,-nombre`
- - Para ordenar por varios criterios, separar estos por comas.
- - Para realizar una ordenación inversa, añadir un guión delante del criterio.
+  - Para ordenar por varios criterios, separar estos por comas.
+  - Para realizar una ordenación inversa, añadir un guión delante del criterio.
