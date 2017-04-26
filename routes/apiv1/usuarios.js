@@ -10,7 +10,7 @@ const crypto = require('crypto');
 const config = require('../../config');
 const jwt = require('jsonwebtoken');
 
-const customError = require('../../lib/customError');
+const CustomError = require('../../lib/CustomError');
 
 const pimienta = 'NodePop';
 
@@ -56,7 +56,7 @@ router.post('/authenticate', (req, res, next) => {
     }
 
     if (!usuario) {
-      const err = new customError(req).user.badCredentials;
+      const err = new CustomError(req).user.badCredentials;
       next(err);
       return;
     }
@@ -66,7 +66,7 @@ router.post('/authenticate', (req, res, next) => {
     const claveHash = hash.digest('hex');
 
     if (usuario.clave !== claveHash) {
-      const err = new customError(req).user.badCredentials;
+      const err = new CustomError(req).user.badCredentials;
       next(err);
       // res.json({ success: false, error: req.__("user.badCredentials") });
       return;

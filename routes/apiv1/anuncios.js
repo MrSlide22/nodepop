@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 const express = require('express');
 const router = express.Router();
@@ -7,10 +7,9 @@ const mongoose = require('mongoose');
 const Anuncio = mongoose.model('Anuncio');
 
 const jwtAuth = require('../../lib/jwtAuth');
-const customError = require('../../lib/customError');
+const CustomError = require('../../lib/CustomError');
 router.use(jwtAuth);
 
-/* GET /apiv1/anuncios */
 router.get('/', function (req, res, next) {
 
   const tag = req.query.tag;
@@ -19,7 +18,7 @@ router.get('/', function (req, res, next) {
   const precio = req.query.precio;
   const limit = parseInt(req.query.limit);
   const skip = parseInt(req.query.start);
-  const sort = req.query.sort;
+  let sort = req.query.sort;
 
   const criterios = {};
 
@@ -36,7 +35,7 @@ router.get('/', function (req, res, next) {
     });
 
     if (invalidTag) {
-      const err = new customError(req).tag.invalid;
+      const err = new CustomError(req).tag.invalid;
       next(err);
       return;
     }
@@ -93,7 +92,7 @@ router.get('/tags', (req, res, next) => {
 
     if (err) {
       next(err);
-      result;
+      return;
     }
 
     const reduceTags = tags.reduce((acum, elem) => {
@@ -102,7 +101,7 @@ router.get('/tags', (req, res, next) => {
 
     const uniqueTags = reduceTags.filter((item, pos, self) => {
       return self.indexOf(item) == pos;
-    })
+    });
 
     res.json({ success: true, result: uniqueTags });
   });

@@ -4,7 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-const customError = require('./lib/customError');
+const CustomError = require('./lib/CustomError');
 
 var index = require('./routes/index');
 
@@ -54,7 +54,7 @@ app.use('/apiv1/:lang(es|en)?/usuarios', require('./routes/apiv1/usuarios'));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
-  var err = new customError(req).page.notFound;
+  var err = new CustomError(req).page.notFound;
   next(err);
 });
 

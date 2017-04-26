@@ -22,7 +22,7 @@ anuncioSchema.statics.list = function (
     query.limit(limit);
     query.sort(sort);
     query.exec(callback);
-}
+};
 
 // creamos el modelo de agente
 var Anuncio = mongoose.model('Anuncio', anuncioSchema);
