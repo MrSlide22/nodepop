@@ -4,6 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+const customError = require('./lib/customError');
 
 var index = require('./routes/index');
 
@@ -20,14 +21,20 @@ i18n.configure({
   directory: __dirname + '/locales'
 });
 
+
 app.use(i18n.init);
 
-app.use('/apiv1/:lang/*', (req, res, next) => {
-  i18n.setLocale(req, req.params.lang);
+app.use('/apiv1/:lang?/*', (req, res, next) => {
+
+  if (req.params.lang) {
+    i18n.setLocale(req, req.params.lang);
+  } else {
+    i18n.setLocale(req, 'es');
+  }
   next();
 });
 
-app.use('/images', express.static( path.join(__dirname, 'images') ) );
+app.use('/images', express.static(path.join(__dirname, 'images')));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -47,8 +54,7 @@ app.use('/apiv1/:lang(es|en)?/usuarios', require('./routes/apiv1/usuarios'));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
-  var err = new Error(req.__("page.notFound"));
-  err.status = 404;
+  var err = new customError(req).page.notFound;
   next(err);
 });
 

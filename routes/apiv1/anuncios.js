@@ -7,6 +7,7 @@ const mongoose = require('mongoose');
 const Anuncio = mongoose.model('Anuncio');
 
 const jwtAuth = require('../../lib/jwtAuth');
+const customError = require('../../lib/customError');
 router.use(jwtAuth);
 
 /* GET /apiv1/anuncios */
@@ -35,8 +36,7 @@ router.get('/', function (req, res, next) {
     });
 
     if (invalidTag) {
-      const err = new Error(req.__("invalidTag"));
-      err.status = 400;
+      const err = new customError(req).tag.invalid;
       next(err);
       return;
     }

@@ -10,6 +10,8 @@ const crypto = require('crypto');
 const config = require('../../config');
 const jwt = require('jsonwebtoken');
 
+const customError = require('../../lib/customError');
+
 const pimienta = 'NodePop';
 
 router.post('/', (req, res, next) => {
@@ -26,7 +28,7 @@ router.post('/', (req, res, next) => {
   datosUsuario.clave = hashClave.digest('hex');
 
   console.log(datosUsuario);
-  
+
   const usuario = new Usuario(datosUsuario);
 
   usuario.save((err, usuarioCreado) => {
@@ -53,14 +55,20 @@ router.post('/authenticate', (req, res, next) => {
       return;
     }
 
+    if (!usuario) {
+      const err = new customError(req).user.badCredentials;
+      next(err);
+      return;
+    }
+
     const hash = crypto.createHash('sha256');
-    
     hash.update(usuario.sal + clave + pimienta);
     const claveHash = hash.digest('hex');
 
-    if (!usuario || usuario.clave !== claveHash) {
-      res.status(403);
-      res.json({ success: false, error: req.__("user.badCredentials") });
+    if (usuario.clave !== claveHash) {
+      const err = new customError(req).user.badCredentials;
+      next(err);
+      // res.json({ success: false, error: req.__("user.badCredentials") });
       return;
     }
 
