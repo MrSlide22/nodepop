@@ -2,7 +2,6 @@
 
 var express = require('express');
 var path = require('path');
-// var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
@@ -20,9 +19,8 @@ const i18n = require('i18n');
 i18n.configure({
   locales: ['es', 'en'],
   register: global,
-  directory: __dirname + '/locales'
+  directory: __dirname + '/locales',
 });
-
 
 app.use(i18n.init);
 
@@ -33,6 +31,7 @@ app.use('/apiv1/:lang?/*', (req, res, next) => {
   } else {
     i18n.setLocale(req, 'es');
   }
+
   next();
 });
 
@@ -61,7 +60,7 @@ app.use(function (req, res, next) {
 });
 
 // error handler
-app.use(function (err, req, res, next) {
+app.use(function (err, req, res) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};

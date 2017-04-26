@@ -95,13 +95,9 @@ router.get('/tags', (req, res, next) => {
       return;
     }
 
-    const reduceTags = tags.reduce((acum, elem) => {
-      return acum.tags.concat(elem.tags);
-    });
+    const reduceTags = tags.reduce((acum, elem) => acum.tags.concat(elem.tags));
 
-    const uniqueTags = reduceTags.filter((item, pos, self) => {
-      return self.indexOf(item) == pos;
-    });
+    const uniqueTags = reduceTags.filter((item, pos, self) => self.indexOf(item) == pos);
 
     res.json({ success: true, result: uniqueTags });
   });

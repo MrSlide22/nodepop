@@ -68,7 +68,6 @@ router.post('/authenticate', (req, res, next) => {
     if (usuario.clave !== claveHash) {
       const err = new CustomError(req).user.badCredentials;
       next(err);
-      // res.json({ success: false, error: req.__("user.badCredentials") });
       return;
     }
 
