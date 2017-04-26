@@ -58,7 +58,7 @@ Devuelve un token que se utilizará para autenticar al usuario en siguientes con
 Para las peticiones con ruta desde `/apiv1/anuncios` en adelante será necesario proporcionar el TOKEN devuelto tras el login.
 
 Este podrá proporcionarse a través de:
-- Query string: `GET /apiv1/anuncios?token=mi_token`
+- Query string: `/apiv1/anuncios?token=mi_token`
 - Header: {x-access-token: mi_token}
 - Body: {token: mi_token}
 
