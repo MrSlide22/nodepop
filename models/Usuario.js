@@ -23,4 +23,4 @@ const usuarioSchema = mongoose.Schema({
     }
 });
 
-var Usuario = mongoose.model('Usuario', usuarioSchema);
+mongoose.model('Usuario', usuarioSchema);

@@ -1,6 +1,8 @@
+'use strict';
+
 var express = require('express');
 var path = require('path');
-var favicon = require('serve-favicon');
+// var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
@@ -14,7 +16,7 @@ require('./models/Anuncio');
 
 var app = express();
 
-const i18n = require("i18n");
+const i18n = require('i18n');
 i18n.configure({
   locales: ['es', 'en'],
   register: global,

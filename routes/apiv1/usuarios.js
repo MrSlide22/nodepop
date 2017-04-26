@@ -31,14 +31,14 @@ router.post('/', (req, res, next) => {
 
   const usuario = new Usuario(datosUsuario);
 
-  usuario.save((err, usuarioCreado) => {
+  usuario.save((err) => {
     if (err) {
       next(err);
       return;
     }
 
     res.status(201);
-    res.json({ success: true, result: req.__("user.saveSuccess") });
+    res.json({ success: true, result: req.__('user.saveSuccess') });
   });
 });
 

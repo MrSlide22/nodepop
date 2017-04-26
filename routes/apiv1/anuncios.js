@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 const express = require('express');
 const router = express.Router();
@@ -28,7 +28,7 @@ router.get('/', function (req, res, next) {
     const validTags = ['work', 'lifetyle', 'motor', 'mobile'];
 
     let invalidTag = false;
-    tags.forEach((element, index) => {
+    tags.forEach((element) => {
       if (validTags.indexOf(element) === -1) {
         invalidTag = true;
       }
