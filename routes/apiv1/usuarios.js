@@ -16,13 +16,13 @@ router.post('/', (req, res, next) => {
 
   const datosUsuario = req.body;
 
-  const hash = crypto.createHash('sha256');
+  const hashSal = crypto.createHash('sha256');
+  hashSal.update((new Date()).toISOString());
+  datosUsuario.sal = hashSal.digest('hex');
 
-  hash.update((new Date()).toISOString());
-  datosUsuario.sal = hash.digest('hex');
-
-  hash.update(datosUsuario.sal + datosUsuario.clave + pimienta);
-  datosUsuario.clave = hash.digest('hex');
+  const hashClave = crypto.createHash('sha256');
+  hashClave.update(datosUsuario.sal + datosUsuario.clave + pimienta);
+  datosUsuario.clave = hashClave.digest('hex');
 
   const usuario = new Usuario(datosUsuario);
 
@@ -38,7 +38,7 @@ router.post('/', (req, res, next) => {
 });
 
 router.post('/authenticate', (req, res, next) => {
-  
+
   // recibimos credenciales
   const email = req.body.email;
   const clave = req.body.clave;
