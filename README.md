@@ -33,6 +33,27 @@ Este API maneja dos colecciones: `Anuncios` y `Usuarios`. Sus esquemas son los s
   
 ## Uso
 
+### Registro usuario
+Añade un nuevo usuario en la API. Recibe el nombre, email y clave del usuario.
+```
+POST /apiv1/usuarios
+BODY{
+  nombre: String,
+  email: String,
+  clave: String
+}
+```
+
+### Login
+```
+POST /apiv1/usuarios/login
+BODY{
+  email: String,
+  clave: String
+}
+```
+Devuelve un token que se utilizará para autenticar al usuario en siguientes conexiones
+
 ### Obtener los anuncios
 ```
 GET /apiv1/anuncios
@@ -53,4 +74,11 @@ Se pueden aplicar los siguientes filtros a través de la `query string`:
 ### Obtener todos los tags existentes
 ```
 GET /apiv1/anuncios/tags
+```
+
+## Idiomas
+Esta API permite obtener las respuestas es dos idiomas posibles, español e ingles. Para ello es necesario indicarlo en los parámetros de la url. Por ejemplo:
+```
+GET /apiv1/es/anuncios
+GET /apiv1/en/anuncios?tags=mobile
 ```
