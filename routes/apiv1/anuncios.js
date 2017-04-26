@@ -12,7 +12,6 @@ router.use(jwtAuth);
 /* GET /apiv1/anuncios */
 router.get('/', function (req, res, next) {
 
-  // recogemos parametros de busqueda
   const tag = req.query.tag;
   const nombre = req.query.nombre;
   const venta = req.query.venta;
@@ -25,11 +24,27 @@ router.get('/', function (req, res, next) {
 
   if (tag) {
     const tags = tag.split(',');
-    console.log(tags);
+
+    const validTags = ['work', 'lifetyle', 'motor', 'mobile'];
+
+    let invalidTag = false;
+    tags.forEach((element, index) => {
+      if (validTags.indexOf(element) === -1) {
+        invalidTag = true;
+      }
+    });
+
+    if (invalidTag) {
+      const err = new Error(req.__("invalidTag"));
+      err.status = 400;
+      next(err);
+      return;
+    }
+
     criterios.tags = {};
     criterios.tags.$in = tags;
   }
-  
+
   if (nombre) {
     criterios.nombre = {};
     criterios.nombre.$regex = new RegExp('^' + nombre, 'i');

@@ -24,9 +24,10 @@ app.use(i18n.init);
 
 app.use('/apiv1/:lang/*', (req, res, next) => {
   i18n.setLocale(req, req.params.lang);
-  console.log(req.getLocale(), req.params.lang);
   next();
 });
+
+app.use('/images', express.static( path.join(__dirname, 'images') ) );
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

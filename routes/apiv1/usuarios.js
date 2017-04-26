@@ -6,7 +6,7 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const Usuario = mongoose.model('Usuario');
 
-const sha256 = require('sha256');
+const crypto = require('crypto');
 const config = require('../../config');
 const jwt = require('jsonwebtoken');
 
@@ -15,8 +15,14 @@ const pimienta = 'NodePop';
 router.post('/', (req, res, next) => {
 
   const datosUsuario = req.body;
-  datosUsuario.sal = sha256((new Date()).toISOString());
-  datosUsuario.clave = sha256(datosUsuario.sal + datosUsuario.clave + pimienta);
+
+  const hash = crypto.createHash('sha256');
+
+  hash.update((new Date()).toISOString());
+  datosUsuario.sal = hash.digest('hex');
+
+  hash.update(datosUsuario.sal + datosUsuario.clave + pimienta);
+  datosUsuario.clave = hash.digest('hex');
 
   const usuario = new Usuario(datosUsuario);
 
@@ -32,6 +38,7 @@ router.post('/', (req, res, next) => {
 });
 
 router.post('/authenticate', (req, res, next) => {
+  
   // recibimos credenciales
   const email = req.body.email;
   const clave = req.body.clave;
@@ -43,7 +50,11 @@ router.post('/authenticate', (req, res, next) => {
       return;
     }
 
-    const claveHash = sha256(usuario.sal + clave + pimienta);
+    const hash = crypto.createHash('sha256');
+    
+    hash.update(usuario.sal + clave + pimienta);
+    const claveHash = hash.digest('hex');
+
     if (!usuario || usuario.clave !== claveHash) {
       res.status(403);
       res.json({ success: false, error: req.__("user.badCredentials") });

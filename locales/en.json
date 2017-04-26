@@ -4,5 +4,6 @@
     "user.saveSuccess": "User successfully added",
     "user.badCredentials": "Invalid credentials",
     "token.notFound": "Token not found",
-    "token.invalid": "Token not valid"
+    "token.invalid": "Token not valid",
+    "invalidTag": "Invalid tag"
 }

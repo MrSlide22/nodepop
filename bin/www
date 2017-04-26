@@ -7,6 +7,7 @@
 var app = require('../app');
 var debug = require('debug')('nodepop:server');
 var http = require('http');
+const cluster = require('cluster');
 
 /**
  * Get port from environment and store in Express.
@@ -14,6 +15,22 @@ var http = require('http');
 
 var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
+
+// si somos el proceso master, arrancamos los clones
+if (cluster.isMaster) {
+
+  //mirar cuantas CPUs tenemos
+  const numCPUs = require('os').cpus().length;
+  for (let i = 0; i < numCPUs; i++) {
+    cluster.fork();
+  }
+
+  cluster.on('exit', (worker, code, signal) => {
+    console.log(`Worker ${worker.process.pid} ha muerto con el codigo ${code} y la señal es ${signal}`);
+    cluster.fork();
+  });
+
+} else {
 
 /**
  * Create HTTP server.
@@ -28,6 +45,8 @@ var server = http.createServer(app);
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
+
+}
 
 /**
  * Normalize a port into a number, string, or false.

@@ -4,5 +4,6 @@
     "user.saveSuccess": "Usuario añadido correctamente",
     "user.badCredentials": "Credenciales incorrectas",
     "token.notFound": "Token no encontrado",
-    "token.invalid": "Token no valido"
+    "token.invalid": "Token no valido",
+    "invalidTag": "Etiqueta no válida"
 }
