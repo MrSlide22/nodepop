@@ -54,7 +54,7 @@ BODY{
 ```
 Devuelve un token que se utilizará para autenticar al usuario en siguientes conexiones
 
-## TOKEN
+### TOKEN
 Para las peticiones con ruta desde `/apiv1/anuncios` en adelante será necesario proporcionar el TOKEN devuelto tras el login.
 
 Este podrá proporcionarse a través de:
