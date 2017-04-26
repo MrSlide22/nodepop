@@ -15,6 +15,7 @@ const pimienta = 'NodePop';
 router.post('/', (req, res, next) => {
 
   const datosUsuario = req.body;
+  console.log(datosUsuario);
 
   const hashSal = crypto.createHash('sha256');
   hashSal.update((new Date()).toISOString());
@@ -24,6 +25,8 @@ router.post('/', (req, res, next) => {
   hashClave.update(datosUsuario.sal + datosUsuario.clave + pimienta);
   datosUsuario.clave = hashClave.digest('hex');
 
+  console.log(datosUsuario);
+  
   const usuario = new Usuario(datosUsuario);
 
   usuario.save((err, usuarioCreado) => {
