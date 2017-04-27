@@ -76,13 +76,14 @@ router.get('/', function (req, res, next) {
     const range = precio.split('-');
 
     if (range.length > 1) {
+
+      criterios.precio = {};
+
       if (range[0] !== undefined && range[0] !== '') {
-        criterios.precio = {};
         criterios.precio.$gte = parseInt(range[0]);
       }
 
       if (range[1] !== undefined && range[1] !== '') {
-        criterios.precio = criterios.precio || {};
         criterios.precio.$lte = parseInt(range[1]);
       }
     } else {

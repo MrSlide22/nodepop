@@ -38,7 +38,7 @@ app.use(cookieParser());
 
 app.use(expressValidator());
 
-app.use('/apiv1/:lang?/*', (req, res, next) => {
+app.use('/apiv1/:lang(es|en)?/*', (req, res, next) => {
 
   if (req.params.lang) {
     i18n.setLocale(req, req.params.lang);
