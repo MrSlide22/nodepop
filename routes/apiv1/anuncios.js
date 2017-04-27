@@ -16,8 +16,8 @@ router.get('/', function (req, res, next) {
   const nombre = req.query.nombre;
   const venta = req.query.venta;
   const precio = req.query.precio;
-  const limit = parseInt(req.query.limit);
-  const skip = parseInt(req.query.start);
+  let limit = req.query.limit;
+  let skip = req.query.start;
   let sort = req.query.sort;
 
   const criterios = {};
@@ -69,6 +69,16 @@ router.get('/', function (req, res, next) {
     } else {
       criterios.precio = parseInt(range[0]);
     }
+  }
+
+  if (limit && limit !== '') {
+
+    limit = parseInt(limit);
+  }
+
+  if (limit && limit !== '') {
+
+    skip = parseInt(skip);
   }
 
   if (sort) {
