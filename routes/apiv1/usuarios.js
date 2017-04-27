@@ -31,8 +31,19 @@ const pimienta = 'NodePop';
  */
 router.post('/', (req, res, next) => {
 
+  req.checkBody('nombre', req.__('isRequired')).notEmpty();
+  req.checkBody('email', req.__('isRequired')).notEmpty();
+  req.checkBody('email', req.__('emailBadFormat')).isEmail();
+  req.checkBody('clave', req.__('isRequired')).notEmpty();
+
+  const validationErrors = req.validationErrors();
+  if (validationErrors) {
+    const err = new CustomError(req).validation(validationErrors);
+    next(err);
+    return;
+  }
+
   const datosUsuario = req.body;
-  console.log(datosUsuario);
 
   const hashSal = crypto.createHash('sha256');
   hashSal.update((new Date()).toISOString());
@@ -66,11 +77,20 @@ router.post('/', (req, res, next) => {
  */
 router.post('/authenticate', (req, res, next) => {
 
-  // recibimos credenciales
   const email = req.body.email;
   const clave = req.body.clave;
 
-  // buscamos el usuario en la base de datos
+  req.checkBody('email', req.__('isRequired')).notEmpty();
+  req.checkBody('email', req.__('emailBadFormat')).isEmail();
+  req.checkBody('clave', req.__('isRequired')).notEmpty();
+
+  const validationErrors = req.validationErrors();
+  if (validationErrors) {
+    const err = new CustomError(req).validation(validationErrors);
+    next(err);
+    return;
+  }
+
   Usuario.findOne({ email: email }).exec((err, usuario) => {
     if (err) {
       next(err);

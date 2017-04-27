@@ -1,9 +1,12 @@
 {
-    "server.internalError": "Server error. Try it again later",
-    "page.notFound": "Route not found",
-    "user.saveSuccess": "User successfully added",
-    "user.badCredentials": "Invalid credentials",
-    "token.notFound": "Token not found",
-    "token.invalid": "Token not valid",
-    "invalidTag": "Invalid tag"
+	"server.internalError": "Server error. Try it again later",
+	"page.notFound": "Route not found",
+	"user.saveSuccess": "User successfully added",
+	"user.badCredentials": "Invalid credentials",
+	"token.notFound": "Token not found",
+	"token.invalid": "Token not valid",
+	"invalidTag": "Invalid tag",
+	"theField": "the field",
+	"isRequired": "is required",
+	"emailBadFormat": "debe tener el formato correcto (user@domain)"
 }

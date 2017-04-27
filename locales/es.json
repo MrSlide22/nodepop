@@ -5,5 +5,8 @@
     "user.badCredentials": "Credenciales incorrectas",
     "token.notFound": "Token no encontrado",
     "token.invalid": "Token no valido",
-    "invalidTag": "Etiqueta no válida"
+    "invalidTag": "Etiqueta no válida",
+    "theField": "El campo",
+    "isRequired": "es requerido",
+    "emailBadFormat": "debe tener el formato correcto (user@domain)"
 }
