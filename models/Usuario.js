@@ -1,7 +1,18 @@
+/**
+ * Modelo de usuario para acceder a la base de datos a través de mongoose.
+ */
+
 'use strict';
 
 const mongoose = require('mongoose');
 
+/**
+ * Esquema del modelo de usuario
+ * @param {String} nombre - nombre del usuario
+ * @param {String} email - email del usuario
+ * @param {String} clave - contraseña del usuario
+ * @param {String} sal - sal aplicada a la clave del usuario
+ */
 const usuarioSchema = mongoose.Schema({
   nombre: {
     type: String,
@@ -23,4 +34,7 @@ const usuarioSchema = mongoose.Schema({
   },
 });
 
+/**
+ * vincular el esquema de usuario a una variable
+ */
 mongoose.model('Usuario', usuarioSchema);

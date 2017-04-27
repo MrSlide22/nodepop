@@ -1,3 +1,8 @@
+/**
+ * Controlador de las rutas referentes a los anuncios
+ * Manejará las rutas que empiecen por /apiv1/:lang(es|en)?/anuncios
+ */
+
 'use strict';
 
 const express = require('express');
@@ -10,6 +15,20 @@ const jwtAuth = require('../../lib/jwtAuth');
 const CustomError = require('../../lib/CustomError');
 router.use(jwtAuth);
 
+/**
+ * GET /apiv1/:lang(es|en)?/anuncios/
+ * Devuelve el listado de anuncios aplicando los filtros proporcionados
+ * a traves de la query string
+ * Parámetros del body:
+ * @param {String[,String...]} tag - etiquetas de los anuncios
+ * @param {String} nombre - nombre del producto del anuncio. Devolverá
+ * todos los que empiecen por el nombre proporcionado
+ * @param {[Numbre]-[Number]} precio - Rango de precios de los anuncios Min-Max.
+ * Se puede omitir uno de los dos extremos.
+ * 
+ * Token en header, body o query string:
+ * @param {String} token - si va en el header se llamará x-access-token
+ */
 router.get('/', function (req, res, next) {
 
   const tag = req.query.tag;
@@ -96,6 +115,14 @@ router.get('/', function (req, res, next) {
   });
 });
 
+/**
+ * GET /apiv1/:lang(es|en)?/anuncios/tags
+ * Devuelve las etiquetas de los anuncios que aparecen
+ * en la base de datos
+ *
+ * Token en header, body o query string:
+ * @param {String} token - si va en el header se llamará x-access-token
+ */
 router.get('/tags', (req, res, next) => {
 
   Anuncio.find({}, 'tags', (err, tags) => {

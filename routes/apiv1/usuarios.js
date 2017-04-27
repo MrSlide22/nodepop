@@ -1,3 +1,8 @@
+/**
+ * Controlador de las rutas referentes a los anuncios
+ * Manejará las rutas que empiecen por /apiv1/:lang(es|en)?/usuarios
+ */
+
 'use strict';
 
 const express = require('express');
@@ -12,8 +17,18 @@ const jwt = require('jsonwebtoken');
 
 const CustomError = require('../../lib/CustomError');
 
+/**
+ * Pimienta utilizada en el hash de la clave del usuario
+ */
 const pimienta = 'NodePop';
 
+/**
+ * POST /apiv1/:lang(es|en)?/usuarios/
+ * Registro de un nuevo usuario
+ * @param {String} nombre - nombre del usuario
+ * @param {String} email - email del usuario. Con este se autenticará el usuario
+ * @param {String} clave - clave del usuario. Esta se hasheará con sal y pimienta
+ */
 router.post('/', (req, res, next) => {
 
   const datosUsuario = req.body;
@@ -42,6 +57,13 @@ router.post('/', (req, res, next) => {
   });
 });
 
+/**
+ * POST /apiv1/:lang(es|en)?/usuarios/authenticate
+ * Autenticación del usuario
+ * @param {String} email - email del usuario
+ * @param {String} clave - contraseña del usuario
+ * @return {String} token para acceder al resto de recursos
+ */
 router.post('/authenticate', (req, res, next) => {
 
   // recibimos credenciales
