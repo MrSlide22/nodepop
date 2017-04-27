@@ -25,7 +25,7 @@ router.use(jwtAuth);
  * todos los que empiecen por el nombre proporcionado
  * @param {[Numbre]-[Number]} precio - Rango de precios de los anuncios Min-Max.
  * Se puede omitir uno de los dos extremos.
- * 
+ *
  * Token en header, body o query string:
  * @param {String} token - si va en el header se llamará x-access-token
  */
